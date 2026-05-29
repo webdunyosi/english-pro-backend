@@ -173,13 +173,86 @@ const handleProfile = async (ctx) => {
  */
 const handleSinovTesti = async (ctx) => {
   try {
-    return ctx.reply(
-      '📝 **SINOV TESTI**\n\nIngliz tili bilim darajangizni aniqlash va o\'rganilgan mavzularni mustahkamlash uchun mo\'ljallangan testlar bo\'limi.\n\n⚡️ *Tez kunda bu yerda turli darajadagi qiziqarli testlar va imtihonlar paydo bo\'ladi!*',
-      { parse_mode: 'Markdown' }
-    );
+    const text =
+      `📊 **Ingliz tilini aniqlash testi**\n\n` +
+      `**1. (A1) Oson daraja**\n` +
+      `She _____ from Japan. She is from South Korea.\n` +
+      `A) are\n` +
+      `B) is not\n` +
+      `C) am not\n` +
+      `D) be not\n\n` +
+      `**2. (A2) Boshlang'ich-o'rta daraja**\n` +
+      `I _____ to the cinema yesterday because I was very tired.\n` +
+      `A) don't go\n` +
+      `B) didn't go\n` +
+      `C) didn't went\n` +
+      `D) wasn't go\n\n` +
+      `**3. (B1) O'rta daraja**\n` +
+      `If it rains tomorrow, we _____ at home and watch a movie.\n` +
+      `A) will stay\n` +
+      `B) stay\n` +
+      `C) stayed\n` +
+      `D) would stay\n\n` +
+      `**4. (B1) O'rta daraja**\n` +
+      `Have you finished fixing that bug in the code _____?\n` +
+      `A) already\n` +
+      `B) just\n` +
+      `C) yet\n` +
+      `D) still\n\n` +
+      `**5. (B2) O'rta-yuqori daraja**\n` +
+      `The new software update _____ by the development team last night.\n` +
+      `A) released\n` +
+      `B) was released\n` +
+      `C) has released\n` +
+      `D) had released\n\n` +
+      `**6. (B2) O'rta-yuqori daraja**\n` +
+      `He _____ have left his laptop at the office; his bag is completely empty.\n` +
+      `A) must\n` +
+      `B) can't\n` +
+      `C) shouldn't\n` +
+      `D) wouldn't\n\n` +
+      `**7. (C1) Yuqori daraja (Inversion)**\n` +
+      `Not only _____ the final exam, but she also got the highest score in the entire university.\n` +
+      `A) she passed\n` +
+      `B) did she pass\n` +
+      `C) she did pass\n` +
+      `D) passed she\n\n` +
+      `**8. (C1) Yuqori daraja (Subjunctive/Conditionals)**\n` +
+      `I would rather you _____ that confidential information to anyone outside the company.\n` +
+      `A) don't tell\n` +
+      `B) didn't tell\n` +
+      `C) not tell\n` +
+      `D) won't tell\n\n` +
+      `**9. (C1/C2) Mukammal daraja (Vocabulary)**\n` +
+      `The manager was entirely _____ to the needs of her staff, which eventually caused high turnover.\n` +
+      `A) indifferent\n` +
+      `B) enthusiastic\n` +
+      `C) susceptible\n` +
+      `D) compliant\n\n` +
+      `**10. (C1/C2) Mukammal daraja (Future Perfect)**\n` +
+      `By the time you finish reading this documentation, I _____ the entire project to the server.\n` +
+      `A) will deploy\n` +
+      `B) will have deployed\n` +
+      `C) am deploying\n` +
+      `D) have deployed\n\n` +
+      `----------------------------------------\n\n` +
+      `✅ **To'g'ri javoblar kaliti:**\n\n` +
+      `*O'zingizni tekshirib ko'rishingiz uchun:*\n\n` +
+      `1. **B** (A1 - *To be* fe'lining inkor shakli)\n` +
+      `2. **B** (A2 - *Past Simple* inkor shakli)\n` +
+      `3. **A** (B1 - *First Conditional* qoidasi)\n` +
+      `4. **C** (B1 - *Present Perfect* dagi *yet* so'zining so'roq gapda ishlatilishi)\n` +
+      `5. **B** (B2 - *Passive Voice* va *Past Simple*)\n` +
+      `6. **A** (B2 - *Modals of Deduction* - kuchli ishonch)\n` +
+      `7. **B** (C1 - *Inversion* qoidasi, urg'u berish uchun yordamchi fe'l oldinga chiqadi)\n` +
+      `8. **B** (C1 - *Would rather + past simple* qoidasi - hozirgi zamondagi xohish)\n` +
+      `9. **A** (C1/C2 - *Indifferent* - beparvo, e'tiborsiz degan ma'noni beradi)\n` +
+      `10. **B** (C1/C2 - *Future Perfect* qoidasi - kelajakdagi ma'lum bir nuqtagacha tugallanadigan ish)`;
+
+    return ctx.reply(text, { parse_mode: 'Markdown' });
   } catch (error) {
     console.error(`handleSinovTesti xatoligi: ${error.message}`);
-    return ctx.reply('Sinov testlarini yuklashda xatolik yuz berdi.');
+    return ctx.reply('Sinov testini yuklashda xatolik yuz berdi.');
   }
 };
 
