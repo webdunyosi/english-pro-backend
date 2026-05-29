@@ -168,97 +168,176 @@ const handleProfile = async (ctx) => {
   }
 };
 
+const placementQuizzes = [
+  {
+    question: '1. (A1) She _____ from Japan. She is from South Korea.',
+    options: ['are', 'is not', 'am not', 'be not'],
+    correctOptionId: 1,
+    explanation: 'A1 - "To be" fe\'lining uchinchi shaxs birlik shakli "is", inkor shaklida "is not" bo\'ladi.'
+  },
+  {
+    question: '2. (A2) I _____ to the cinema yesterday because I was very tired.',
+    options: ["don't go", "didn't go", "didn't went", "wasn't go"],
+    correctOptionId: 1,
+    explanation: 'A2 - O\'tgan zamon (Past Simple) inkor gapida "didn\'t" yordamchi fe\'lidan keyin fe\'lning 1-shakli (go) keladi.'
+  },
+  {
+    question: '3. (B1) If it rains tomorrow, we _____ at home and watch a movie.',
+    options: ['will stay', 'stay', 'stayed', 'would stay'],
+    correctOptionId: 0,
+    explanation: 'B1 - Birinchi tur shart gapi (First Conditional): If + Present Simple, Future Simple (will stay).'
+  },
+  {
+    question: '4. (B1) Have you finished fixing that bug in the code _____?',
+    options: ['already', 'just', 'yet', 'still'],
+    correctOptionId: 2,
+    explanation: 'B1 - Hozirgi tugallangan zamon (Present Perfect) so\'roq gaplarida oxirida "yet" ishlatiladi.'
+  },
+  {
+    question: '5. (B2) The new software update _____ by the development team last night.',
+    options: ['released', 'was released', 'has released', 'had released'],
+    correctOptionId: 1,
+    explanation: 'B2 - Majhul nisbat (Passive Voice) va o\'tgan zamon (Past Simple): object + was/were + V3 (was released).'
+  },
+  {
+    question: '6. (B2) He _____ have left his laptop at the office; his bag is completely empty.',
+    options: ['must', "can't", "shouldn't", "wouldn't"],
+    correctOptionId: 0,
+    explanation: 'B2 - Taxmin qilish (Modals of Deduction): biror narsaga qat\'iy ishonch bildirganimizda "must have done" ishlatiladi.'
+  },
+  {
+    question: '7. (C1) Not only _____ the final exam, but she also got the highest score in the entire university.',
+    options: ['she passed', 'did she pass', 'she did pass', 'passed she'],
+    correctOptionId: 1,
+    explanation: 'C1 - Inversion: Gap "Not only" bilan boshlanganda gap tarkibi so\'roq gap shaklida inversiya qilinadi (did she pass).'
+  },
+  {
+    question: '8. (C1) I would rather you _____ that confidential information to anyone outside the company.',
+    options: ["don't tell", "didn't tell", "not tell", "won't tell"],
+    correctOptionId: 1,
+    explanation: 'C1 - "Would rather + subject + Past Simple" tuzilishi hozirgi/kelasi zamondagi istak va xohishlarni bildiradi.'
+  },
+  {
+    question: '9. (C1/C2) The manager was entirely _____ to the needs of her staff, which eventually caused high turnover.',
+    options: ['indifferent', 'enthusiastic', 'susceptible', 'compliant'],
+    correctOptionId: 0,
+    explanation: 'C1/C2 - "Indifferent" so\'zi kimga/nimagadir e\'tiborsiz, beparvo bo\'lish degan ma\'noni anglatadi.'
+  },
+  {
+    question: '10. (C1/C2) By the time you finish reading this documentation, I _____ the entire project to the server.',
+    options: ['will deploy', 'will have deployed', 'am deploying', 'have deployed'],
+    correctOptionId: 1,
+    explanation: 'C1/C2 - "By the time + Present Simple, Future Perfect (will have deployed)" kelajakdagi tugallanadigan ishni bildiradi.'
+  }
+];
+
 /**
  * "SINOV TESTI" reply tugmasini qayta ishlash
  */
 const handleSinovTesti = async (ctx) => {
   try {
+    const userId = ctx.from.id;
+
+    // Foydalanuvchini bazadan qidirish yoki yaratish
+    let user = await User.findOne({ telegramId: userId.toString() });
+    if (!user) {
+      user = new User({
+        telegramId: userId.toString(),
+        username: ctx.from.username || null,
+        firstName: ctx.from.first_name || 'Foydalanuvchi',
+      });
+    }
+
+    // Sinov testi boshlanishi xabari
     await ctx.reply(
-      '📊 **Ingliz tilini aniqlash testi**\n\nQuyidagi testlarni yechish orqali ingliz tili bilim darajangizni tekshirib o\'ting! 👇',
+      '📊 **Ingliz tilini aniqlash testi boshlandi!**\n\nSizga ketma-ket 10 ta darajani aniqlovchi qiziqarli test savollari beriladi. Har bir savolga javob berganingizdan so\'ng, keyingi savol avtomatik ravishda ochiladi. Omad! 🍀',
       { parse_mode: 'Markdown' }
     );
 
-    const placementQuizzes = [
-      {
-        question: '1. (A1) She _____ from Japan. She is from South Korea.',
-        options: ['are', 'is not', 'am not', 'be not'],
-        correctOptionId: 1,
-        explanation: 'A1 - "To be" fe\'lining uchinchi shaxs birlik shakli "is", inkor shaklida "is not" bo\'ladi.'
-      },
-      {
-        question: '2. (A2) I _____ to the cinema yesterday because I was very tired.',
-        options: ["don't go", "didn't go", "didn't went", "wasn't go"],
-        correctOptionId: 1,
-        explanation: 'A2 - O\'tgan zamon (Past Simple) inkor gapida "didn\'t" yordamchi fe\'lidan keyin fe\'lning 1-shakli (go) keladi.'
-      },
-      {
-        question: '3. (B1) If it rains tomorrow, we _____ at home and watch a movie.',
-        options: ['will stay', 'stay', 'stayed', 'would stay'],
-        correctOptionId: 0,
-        explanation: 'B1 - Birinchi tur shart gapi (First Conditional): If + Present Simple, Future Simple (will stay).'
-      },
-      {
-        question: '4. (B1) Have you finished fixing that bug in the code _____?',
-        options: ['already', 'just', 'yet', 'still'],
-        correctOptionId: 2,
-        explanation: 'B1 - Hozirgi tugallangan zamon (Present Perfect) so\'roq gaplarida oxirida "yet" ishlatiladi.'
-      },
-      {
-        question: '5. (B2) The new software update _____ by the development team last night.',
-        options: ['released', 'was released', 'has released', 'had released'],
-        correctOptionId: 1,
-        explanation: 'B2 - Majhul nisbat (Passive Voice) va o\'tgan zamon (Past Simple): object + was/were + V3 (was released).'
-      },
-      {
-        question: '6. (B2) He _____ have left his laptop at the office; his bag is completely empty.',
-        options: ['must', "can't", "shouldn't", "wouldn't"],
-        correctOptionId: 0,
-        explanation: 'B2 - Taxmin qilish (Modals of Deduction): biror narsaga qat\'iy ishonch bildirganimizda "must have done" ishlatiladi.'
-      },
-      {
-        question: '7. (C1) Not only _____ the final exam, but she also got the highest score in the entire university.',
-        options: ['she passed', 'did she pass', 'she did pass', 'passed she'],
-        correctOptionId: 1,
-        explanation: 'C1 - Inversion: Gap "Not only" bilan boshlanganda gap tarkibi so\'roq gap shaklida inversiya qilinadi (did she pass).'
-      },
-      {
-        question: '8. (C1) I would rather you _____ that confidential information to anyone outside the company.',
-        options: ["don't tell", "didn't tell", "not tell", "won't tell"],
-        correctOptionId: 1,
-        explanation: 'C1 - "Would rather + subject + Past Simple" tuzilishi hozirgi/kelasi zamondagi istak va xohishlarni bildiradi.'
-      },
-      {
-        question: '9. (C1/C2) The manager was entirely _____ to the needs of her staff, which eventually caused high turnover.',
-        options: ['indifferent', 'enthusiastic', 'susceptible', 'compliant'],
-        correctOptionId: 0,
-        explanation: 'C1/C2 - "Indifferent" so\'zi kimga/nimagadir e\'tiborsiz, beparvo bo\'lish degan ma\'noni anglatadi.'
-      },
-      {
-        question: '10. (C1/C2) By the time you finish reading this documentation, I _____ the entire project to the server.',
-        options: ['will deploy', 'will have deployed', 'am deploying', 'have deployed'],
-        correctOptionId: 1,
-        explanation: 'C1/C2 - "By the time + Present Simple, Future Perfect (will have deployed)" kelajakdagi tugallanadigan ishni bildiradi.'
-      }
-    ];
+    // Birinchi savolga sozlash va saqlash
+    user.quizStep = 1;
+    await user.save();
 
-    // Har bir testni alohida Telegram Quiz (Poll) shaklida yuboramiz
-    for (const quiz of placementQuizzes) {
-      await ctx.replyWithPoll(
-        quiz.question,
-        quiz.options,
-        {
-          type: 'quiz',
-          correct_option_id: quiz.correctOptionId,
-          explanation: quiz.explanation,
-          is_anonymous: true
-        }
-      );
-      // Ketma-ketlik buzilmasligi va Telegram cheklovlariga tushmaslik uchun 500ms kechikish qo'shamiz
-      await new Promise(resolve => setTimeout(resolve, 500));
-    }
+    // 1-savolni yuborish
+    const firstQuiz = placementQuizzes[0];
+    return ctx.replyWithPoll(
+      firstQuiz.question,
+      firstQuiz.options,
+      {
+        type: 'quiz',
+        correct_option_id: firstQuiz.correctOptionId,
+        explanation: firstQuiz.explanation,
+        is_anonymous: false // User javobini kuzatib, keyingi savolni yuborish uchun false bo'lishi shart!
+      }
+    );
   } catch (error) {
     console.error(`handleSinovTesti xatoligi: ${error.message}`);
-    return ctx.reply('Sinov testini yuklashda xatolik yuz berdi. Iltimos, birozdan so\'ng qayta urinib ko\'ring.');
+    return ctx.reply('Sinov testini boshlashda xatolik yuz berdi. Iltimos, birozdan so\'ng qayta urinib ko\'ring.');
+  }
+};
+
+/**
+ * Foydalanuvchi poll/quiz ga javob berganda keyingi savolni yuboruvchi handler
+ */
+const handlePollAnswer = async (ctx) => {
+  try {
+    const pollAnswer = ctx.pollAnswer;
+    const userId = pollAnswer.user.id;
+
+    // Foydalanuvchini bazadan qidirish
+    const user = await User.findOne({ telegramId: userId.toString() });
+    if (!user || user.quizStep === 0) {
+      return; // Agar foydalanuvchi test jarayonida bo'lmasa, inkor qilamiz
+    }
+
+    const currentStep = user.quizStep; // 1 dan 10 gacha bo'lgan qadam
+
+    if (currentStep >= 1 && currentStep <= 9) {
+      // Keyingi savol
+      const nextQuiz = placementQuizzes[currentStep];
+
+      // Qadamni oshirish va saqlash
+      user.quizStep = currentStep + 1;
+      await user.save();
+
+      // Telegram cheklovi va foydalanuvchi o'z natijasini ko'rishi uchun 1 soniya kutamiz
+      setTimeout(async () => {
+        try {
+          await ctx.telegram.sendPoll(
+            userId,
+            nextQuiz.question,
+            nextQuiz.options,
+            {
+              type: 'quiz',
+              correct_option_id: nextQuiz.correctOptionId,
+              explanation: nextQuiz.explanation,
+              is_anonymous: false
+            }
+          );
+        } catch (err) {
+          console.error(`Keyingi quizni yuborishda xatolik: ${err.message}`);
+        }
+      }, 1000);
+
+    } else if (currentStep === 10) {
+      // Test yakunlandi!
+      user.quizStep = 0; // reset
+      await user.save();
+
+      setTimeout(async () => {
+        try {
+          await ctx.telegram.sendMessage(
+            userId,
+            '🎉 **Tabriklaymiz! Siz barcha 10 ta test savollarini muvaffaqiyatli yakunladingiz.**\n\nBilimingizni oshirishda va botimizdan foydalanishda davom eting! 🍀',
+            { parse_mode: 'Markdown' }
+          );
+        } catch (err) {
+          console.error(`Yakuniy xabarni yuborishda xatolik: ${err.message}`);
+        }
+      }, 1200);
+    }
+  } catch (error) {
+    console.error(`handlePollAnswer xatoligi: ${error.message}`);
   }
 };
 
@@ -454,4 +533,5 @@ module.exports = {
   handleLugatMain,
   handleBook1,
   handleBook2,
+  handlePollAnswer,
 };

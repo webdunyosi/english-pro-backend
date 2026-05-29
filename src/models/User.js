@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  // Foydalanuvchining joriy quiz testi qadami (0 - boshlamagan, 1-10 - joriy savol)
+  quizStep: {
+    type: Number,
+    default: 0,
+  },
 });
 
 // User modelini eksport qilish

@@ -13,6 +13,7 @@ const {
   handleLugatMain,
   handleBook1,
   handleBook2,
+  handlePollAnswer,
 } = require('./controllers/botController');
 
 /**
@@ -42,6 +43,9 @@ const startApp = async () => {
     bot.action('book_1', handleBook1);
     bot.action('book_2', handleBook2);
     bot.action('lugat_main', handleLugatMain);
+
+    // Poll/quiz javoblarini tinglash
+    bot.on('poll_answer', handlePollAnswer);
 
     // Yangi reply menu tugmalari
     bot.hears('SINOV TESTI', handleSinovTesti);
