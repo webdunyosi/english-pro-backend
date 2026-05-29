@@ -173,83 +173,88 @@ const handleProfile = async (ctx) => {
  */
 const handleSinovTesti = async (ctx) => {
   try {
-    const text =
-      `📊 **Ingliz tilini aniqlash testi**\n\n` +
-      `**1. (A1) Oson daraja**\n` +
-      `She _____ from Japan. She is from South Korea.\n` +
-      `A) are\n` +
-      `B) is not\n` +
-      `C) am not\n` +
-      `D) be not\n\n` +
-      `**2. (A2) Boshlang'ich-o'rta daraja**\n` +
-      `I _____ to the cinema yesterday because I was very tired.\n` +
-      `A) don't go\n` +
-      `B) didn't go\n` +
-      `C) didn't went\n` +
-      `D) wasn't go\n\n` +
-      `**3. (B1) O'rta daraja**\n` +
-      `If it rains tomorrow, we _____ at home and watch a movie.\n` +
-      `A) will stay\n` +
-      `B) stay\n` +
-      `C) stayed\n` +
-      `D) would stay\n\n` +
-      `**4. (B1) O'rta daraja**\n` +
-      `Have you finished fixing that bug in the code _____?\n` +
-      `A) already\n` +
-      `B) just\n` +
-      `C) yet\n` +
-      `D) still\n\n` +
-      `**5. (B2) O'rta-yuqori daraja**\n` +
-      `The new software update _____ by the development team last night.\n` +
-      `A) released\n` +
-      `B) was released\n` +
-      `C) has released\n` +
-      `D) had released\n\n` +
-      `**6. (B2) O'rta-yuqori daraja**\n` +
-      `He _____ have left his laptop at the office; his bag is completely empty.\n` +
-      `A) must\n` +
-      `B) can't\n` +
-      `C) shouldn't\n` +
-      `D) wouldn't\n\n` +
-      `**7. (C1) Yuqori daraja (Inversion)**\n` +
-      `Not only _____ the final exam, but she also got the highest score in the entire university.\n` +
-      `A) she passed\n` +
-      `B) did she pass\n` +
-      `C) she did pass\n` +
-      `D) passed she\n\n` +
-      `**8. (C1) Yuqori daraja (Subjunctive/Conditionals)**\n` +
-      `I would rather you _____ that confidential information to anyone outside the company.\n` +
-      `A) don't tell\n` +
-      `B) didn't tell\n` +
-      `C) not tell\n` +
-      `D) won't tell\n\n` +
-      `**9. (C1/C2) Mukammal daraja (Vocabulary)**\n` +
-      `The manager was entirely _____ to the needs of her staff, which eventually caused high turnover.\n` +
-      `A) indifferent\n` +
-      `B) enthusiastic\n` +
-      `C) susceptible\n` +
-      `D) compliant\n\n` +
-      `**10. (C1/C2) Mukammal daraja (Future Perfect)**\n` +
-      `By the time you finish reading this documentation, I _____ the entire project to the server.\n` +
-      `A) will deploy\n` +
-      `B) will have deployed\n` +
-      `C) am deploying\n` +
-      `D) have deployed\n\n` +
-      `----------------------------------------\n\n` +
-      `✅ **To'g'ri javoblar kaliti:**\n\n` +
-      `*O'zingizni tekshirib ko'rishingiz uchun:*\n\n` +
-      `1. **B** (A1 - *To be* fe'lining inkor shakli)\n` +
-      `2. **B** (A2 - *Past Simple* inkor shakli)\n` +
-      `3. **A** (B1 - *First Conditional* qoidasi)\n` +
-      `4. **C** (B1 - *Present Perfect* dagi *yet* so'zining so'roq gapda ishlatilishi)\n` +
-      `5. **B** (B2 - *Passive Voice* va *Past Simple*)\n` +
-      `6. **A** (B2 - *Modals of Deduction* - kuchli ishonch)\n` +
-      `7. **B** (C1 - *Inversion* qoidasi, urg'u berish uchun yordamchi fe'l oldinga chiqadi)\n` +
-      `8. **B** (C1 - *Would rather + past simple* qoidasi - hozirgi zamondagi xohish)\n` +
-      `9. **A** (C1/C2 - *Indifferent* - beparvo, e'tiborsiz degan ma'noni beradi)\n` +
-      `10. **B** (C1/C2 - *Future Perfect* qoidasi - kelajakdagi ma'lum bir nuqtagacha tugallanadigan ish)`;
+    await ctx.reply(
+      '📊 **Ingliz tilini aniqlash testi**\n\nQuyidagi testlarni yechish orqali ingliz tili bilim darajangizni tekshirib o\'ting! 👇',
+      { parse_mode: 'Markdown' }
+    );
 
-    return ctx.reply(text, { parse_mode: 'Markdown' });
+    const placementQuizzes = [
+      {
+        question: '1. (A1) She _____ from Japan. She is from South Korea.',
+        options: ['are', 'is not', 'am not', 'be not'],
+        correctOptionId: 1,
+        explanation: 'A1 - "To be" fe\'lining uchinchi shaxs birlik shakli "is", inkor shaklida "is not" bo\'ladi.'
+      },
+      {
+        question: '2. (A2) I _____ to the cinema yesterday because I was very tired.',
+        options: ["don't go", "didn't go", "didn't went", "wasn't go"],
+        correctOptionId: 1,
+        explanation: 'A2 - O\'tgan zamon (Past Simple) inkor gapida "didn\'t" yordamchi fe\'lidan keyin fe\'lning 1-shakli (go) keladi.'
+      },
+      {
+        question: '3. (B1) If it rains tomorrow, we _____ at home and watch a movie.',
+        options: ['will stay', 'stay', 'stayed', 'would stay'],
+        correctOptionId: 0,
+        explanation: 'B1 - Birinchi tur shart gapi (First Conditional): If + Present Simple, Future Simple (will stay).'
+      },
+      {
+        question: '4. (B1) Have you finished fixing that bug in the code _____?',
+        options: ['already', 'just', 'yet', 'still'],
+        correctOptionId: 2,
+        explanation: 'B1 - Hozirgi tugallangan zamon (Present Perfect) so\'roq gaplarida oxirida "yet" ishlatiladi.'
+      },
+      {
+        question: '5. (B2) The new software update _____ by the development team last night.',
+        options: ['released', 'was released', 'has released', 'had released'],
+        correctOptionId: 1,
+        explanation: 'B2 - Majhul nisbat (Passive Voice) va o\'tgan zamon (Past Simple): object + was/were + V3 (was released).'
+      },
+      {
+        question: '6. (B2) He _____ have left his laptop at the office; his bag is completely empty.',
+        options: ['must', "can't", 'shouldn't', "wouldn't"],
+        correctOptionId: 0,
+        explanation: 'B2 - Taxmin qilish (Modals of Deduction): biror narsaga qat\'iy ishonch bildirganimizda "must have done" ishlatiladi.'
+      },
+      {
+        question: '7. (C1) Not only _____ the final exam, but she also got the highest score in the entire university.',
+        options: ['she passed', 'did she pass', 'she did pass', 'passed she'],
+        correctOptionId: 1,
+        explanation: 'C1 - Inversion: Gap "Not only" bilan boshlanganda gap tarkibi so\'roq gap shaklida inversiya qilinadi (did she pass).'
+      },
+      {
+        question: '8. (C1) I would rather you _____ that confidential information to anyone outside the company.',
+        options: ["don't tell", "didn't tell", "not tell", "won't tell"],
+        correctOptionId: 1,
+        explanation: 'C1 - "Would rather + subject + Past Simple" tuzilishi hozirgi/kelasi zamondagi istak va xohishlarni bildiradi.'
+      },
+      {
+        question: '9. (C1/C2) The manager was entirely _____ to the needs of her staff, which eventually caused high turnover.',
+        options: ['indifferent', 'enthusiastic', 'susceptible', 'compliant'],
+        correctOptionId: 0,
+        explanation: 'C1/C2 - "Indifferent" so\'zi kimga/nimagadir e\'tiborsiz, beparvo bo\'lish degan ma\'noni anglatadi.'
+      },
+      {
+        question: '10. (C1/C2) By the time you finish reading this documentation, I _____ the entire project to the server.',
+        options: ['will deploy', 'will have deployed', 'am deploying', 'have deployed'],
+        correctOptionId: 1,
+        explanation: 'C1/C2 - "By the time + Present Simple, Future Perfect (will have deployed)" kelajakdagi tugallanadigan ishni bildiradi.'
+      }
+    ];
+
+    // Har bir testni alohida Telegram Quiz (Poll) shaklida yuboramiz
+    for (const quiz of placementQuizzes) {
+      await ctx.replyWithQuiz(
+        quiz.question,
+        quiz.options,
+        {
+          correct_option_id: quiz.correctOptionId,
+          explanation: quiz.explanation,
+          is_anonymous: true
+        }
+      );
+      // Ketma-ketlik buzilmasligi va Telegram cheklovlariga tushmaslik uchun juda kichik kechikish qo'shamiz
+      await new Promise(resolve => setTimeout(resolve, 350));
+    }
   } catch (error) {
     console.error(`handleSinovTesti xatoligi: ${error.message}`);
     return ctx.reply('Sinov testini yuklashda xatolik yuz berdi.');
