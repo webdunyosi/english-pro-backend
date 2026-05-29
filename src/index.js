@@ -10,6 +10,9 @@ const {
   handleSinovTesti,
   handleVideoDarslik,
   handleLugat,
+  handleLugatMain,
+  handleBook1,
+  handleBook2,
 } = require('./controllers/botController');
 
 /**
@@ -34,6 +37,11 @@ const startApp = async () => {
 
     // Callback query "check_subscription" (Inline tugma)
     bot.action('check_subscription', handleCheckSubscription);
+
+    // Lug'at kitoblarining callback harakatlari
+    bot.action('book_1', handleBook1);
+    bot.action('book_2', handleBook2);
+    bot.action('lugat_main', handleLugatMain);
 
     // Yangi reply menu tugmalari
     bot.hears('SINOV TESTI', handleSinovTesti);

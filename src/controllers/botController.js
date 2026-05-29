@@ -203,15 +203,68 @@ const handleVideoDarslik = async (ctx) => {
  */
 const handleLugat = async (ctx) => {
   try {
+    return ctx.reply(
+      `📚 **Lug'at Bo'limi**\n\nQuyidagi kitoblardan birini tanlang:`,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: '📘 KITOB 1', callback_data: 'book_1' },
+              { text: '📘 KITOB 2', callback_data: 'book_2' }
+            ]
+          ]
+        }
+      }
+    );
+  } catch (error) {
+    console.error(`handleLugat xatoligi: ${error.message}`);
+    return ctx.reply('Lug\'at bo\'limini yuklashda xatolik yuz berdi.');
+  }
+};
+
+/**
+ * LUG'AT asosiy oynasiga qaytish (ortga tugmasi uchun)
+ */
+const handleLugatMain = async (ctx) => {
+  try {
+    await ctx.answerCbQuery();
+    return ctx.editMessageText(
+      `📚 **Lug'at Bo'limi**\n\nQuyidagi kitoblardan birini tanlang:`,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: '📘 KITOB 1', callback_data: 'book_1' },
+              { text: '📘 KITOB 2', callback_data: 'book_2' }
+            ]
+          ]
+        }
+      }
+    ).catch((err) => {
+      console.warn(`handleLugatMain editMessageText xatoligi: ${err.message}`);
+    });
+  } catch (error) {
+    console.error(`handleLugatMain xatoligi: ${error.message}`);
+  }
+};
+
+/**
+ * KITOB 1 bo'limini ko'rsatish
+ */
+const handleBook1 = async (ctx) => {
+  try {
+    await ctx.answerCbQuery();
     const text =
-      `📘 **4000 Essential English Words**\n\n` +
+      `📘 **4000 Essential English Words - KITOB 1**\n\n` +
       `🖋 20 savollar\n` +
       `💬 Quiz mode\n` +
       `🔄 Word EN — Word UZ\n` +
       `⏱ Har bir savolga 30 sec\n\n` +
       `⌛️ **Unit'larni tanlash orqali savollar ro'yxatini shakllantiring!**`;
 
-    return ctx.reply(
+    return ctx.editMessageText(
       text,
       {
         parse_mode: 'Markdown',
@@ -256,14 +309,48 @@ const handleLugat = async (ctx) => {
               { text: 'Unit 22', url: 'https://t.me/SmartTesterBot?start=45Q4kBro' },
               { text: 'Unit 23', url: 'https://t.me/SmartTesterBot?start=2UsNzjzF' },
               { text: 'Unit 24', url: 'https://t.me/SmartTesterBot?start=24arMobX' }
+            ],
+            [
+              { text: '◀️ Ortga', callback_data: 'lugat_main' }
             ]
           ]
         }
       }
-    );
+    ).catch((err) => {
+      console.warn(`handleBook1 editMessageText xatoligi: ${err.message}`);
+    });
   } catch (error) {
-    console.error(`handleLugat xatoligi: ${error.message}`);
-    return ctx.reply('Lug\'at bo\'limini yuklashda xatolik yuz berdi.');
+    console.error(`handleBook1 xatoligi: ${error.message}`);
+  }
+};
+
+/**
+ * KITOB 2 bo'limini ko'rsatish
+ */
+const handleBook2 = async (ctx) => {
+  try {
+    await ctx.answerCbQuery();
+    const text =
+      `📘 **4000 Essential English Words - KITOB 2**\n\n` +
+      `⚡️ *Ushbu kitob uchun darslar va testlar tez kunda yuklanadi. Bizni kuzatishda davom eting!*`;
+
+    return ctx.editMessageText(
+      text,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: '◀️ Ortga', callback_data: 'lugat_main' }
+            ]
+          ]
+        }
+      }
+    ).catch((err) => {
+      console.warn(`handleBook2 editMessageText xatoligi: ${err.message}`);
+    });
+  } catch (error) {
+    console.error(`handleBook2 xatoligi: ${error.message}`);
   }
 };
 
@@ -275,4 +362,7 @@ module.exports = {
   handleSinovTesti,
   handleVideoDarslik,
   handleLugat,
+  handleLugatMain,
+  handleBook1,
+  handleBook2,
 };
