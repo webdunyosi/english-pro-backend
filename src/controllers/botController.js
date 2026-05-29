@@ -8,7 +8,8 @@ const getMainMenu = () => {
   return {
     reply_markup: {
       keyboard: [
-        [{ text: '📚 Darslar' }, { text: '👤 Profil' }]
+        [{ text: 'SINOV TESTI' }, { text: 'VIDEO DARSLIK' }],
+        [{ text: "LUG'AT" }]
       ],
       resize_keyboard: true, // Tugmalarni mos o'lchamga keltirish
       one_time_keyboard: false, // Doimiy ko'rinib turishi
@@ -167,9 +168,57 @@ const handleProfile = async (ctx) => {
   }
 };
 
+/**
+ * "SINOV TESTI" reply tugmasini qayta ishlash
+ */
+const handleSinovTesti = async (ctx) => {
+  try {
+    return ctx.reply(
+      '📝 **SINOV TESTI**\n\nIngliz tili bilim darajangizni aniqlash va o\'rganilgan mavzularni mustahkamlash uchun mo\'ljallangan testlar bo\'limi.\n\n⚡️ *Tez kunda bu yerda turli darajadagi qiziqarli testlar va imtihonlar paydo bo\'ladi!*',
+      { parse_mode: 'Markdown' }
+    );
+  } catch (error) {
+    console.error(`handleSinovTesti xatoligi: ${error.message}`);
+    return ctx.reply('Sinov testlarini yuklashda xatolik yuz berdi.');
+  }
+};
+
+/**
+ * "VIDEO DARSLIK" reply tugmasini qayta ishlash
+ */
+const handleVideoDarslik = async (ctx) => {
+  try {
+    return ctx.reply(
+      '📺 **VIDEO DARSLIK**\n\nIngliz tili darslarini oson va qiziqarli o\'rganishingiz uchun maxsus video darsliklar va ko\'rsatmalar to\'plami.\n\n⚡️ *Tez kunda bu yerda yangi video darslar yuklanadi. Bizni kuzatishda davom eting!*',
+      { parse_mode: 'Markdown' }
+    );
+  } catch (error) {
+    console.error(`handleVideoDarslik xatoligi: ${error.message}`);
+    return ctx.reply('Video darsliklarni yuklashda xatolik yuz berdi.');
+  }
+};
+
+/**
+ * "LUG'AT" reply tugmasini qayta ishlash
+ */
+const handleLugat = async (ctx) => {
+  try {
+    return ctx.reply(
+      '📖 **LUG\'AT**\n\nSo\'z boyligingizni oshirish uchun eng ko\'p ishlatiladigan inglizcha so\'zlar, iboralar va ularning tarjimalari.\n\n⚡️ *Tez kunda bu yerda qulay lug\'at va so\'z o\'rganish bo\'limi ishga tushadi!*',
+      { parse_mode: 'Markdown' }
+    );
+  } catch (error) {
+    console.error(`handleLugat xatoligi: ${error.message}`);
+    return ctx.reply('Lug\'at bo\'limini yuklashda xatolik yuz berdi.');
+  }
+};
+
 module.exports = {
   handleStart,
   handleCheckSubscription,
   handleLessons,
   handleProfile,
+  handleSinovTesti,
+  handleVideoDarslik,
+  handleLugat,
 };

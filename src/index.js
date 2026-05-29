@@ -7,6 +7,9 @@ const {
   handleCheckSubscription,
   handleLessons,
   handleProfile,
+  handleSinovTesti,
+  handleVideoDarslik,
+  handleLugat,
 } = require('./controllers/botController');
 
 /**
@@ -32,7 +35,13 @@ const startApp = async () => {
     // Callback query "check_subscription" (Inline tugma)
     bot.action('check_subscription', handleCheckSubscription);
 
-    // Reply menu tugmalari
+    // Yangi reply menu tugmalari
+    bot.hears('SINOV TESTI', handleSinovTesti);
+    bot.hears('VIDEO DARSLIK', handleVideoDarslik);
+    // Lug'at so'zining har xil turdagi apostroflari bilan kelish ehtimolini hisobga olamiz
+    bot.hears(['LUG\'AT', 'LUG‘AT', 'LUG’AT', 'Lug\'at'], handleLugat);
+
+    // Eski reply menu tugmalari (foydalanuvchilarda eski tugmalar keshlanib qolgan bo'lsa xatolik bo'lmasligi uchun)
     bot.hears('📚 Darslar', handleLessons);
     bot.hears('👤 Profil', handleProfile);
 
