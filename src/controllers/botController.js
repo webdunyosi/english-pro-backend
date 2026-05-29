@@ -241,6 +241,21 @@ const handleLugat = async (ctx) => {
               { text: 'Unit 13', url: 'https://t.me/SmartTesterBot?start=5HHJZpPw' },
               { text: 'Unit 14', url: 'https://t.me/SmartTesterBot?start=2JWYdpP7' },
               { text: 'Unit 15', url: 'https://t.me/SmartTesterBot?start=3DjhouT4' }
+            ],
+            [
+              { text: 'Unit 16', url: 'https://t.me/SmartTesterBot?start=2Ld2dpUF' },
+              { text: 'Unit 17', url: 'https://t.me/SmartTesterBot?start=2JNfDxFW' },
+              { text: 'Unit 18', url: 'https://t.me/SmartTesterBot?start=2rtQWoxA' }
+            ],
+            [
+              { text: 'Unit 19', url: 'https://t.me/SmartTesterBot?start=3V3Fn9f7' },
+              { text: 'Unit 20', url: 'https://t.me/SmartTesterBot?start=2YbWP3Xp' },
+              { text: 'Unit 21', url: 'https://t.me/SmartTesterBot?start=6Bq5SrfC' }
+            ],
+            [
+              { text: 'Unit 22', url: 'https://t.me/SmartTesterBot?start=45Q4kBro' },
+              { text: 'Unit 23', url: 'https://t.me/SmartTesterBot?start=2UsNzjzF' },
+              { text: 'Unit 24', url: 'https://t.me/SmartTesterBot?start=24arMobX' }
             ]
           ]
         }
