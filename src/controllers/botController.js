@@ -243,21 +243,22 @@ const handleSinovTesti = async (ctx) => {
 
     // Har bir testni alohida Telegram Quiz (Poll) shaklida yuboramiz
     for (const quiz of placementQuizzes) {
-      await ctx.replyWithQuiz(
+      await ctx.replyWithPoll(
         quiz.question,
         quiz.options,
         {
+          type: 'quiz',
           correct_option_id: quiz.correctOptionId,
           explanation: quiz.explanation,
           is_anonymous: true
         }
       );
-      // Ketma-ketlik buzilmasligi va Telegram cheklovlariga tushmaslik uchun juda kichik kechikish qo'shamiz
-      await new Promise(resolve => setTimeout(resolve, 350));
+      // Ketma-ketlik buzilmasligi va Telegram cheklovlariga tushmaslik uchun 500ms kechikish qo'shamiz
+      await new Promise(resolve => setTimeout(resolve, 500));
     }
   } catch (error) {
     console.error(`handleSinovTesti xatoligi: ${error.message}`);
-    return ctx.reply('Sinov testini yuklashda xatolik yuz berdi.');
+    return ctx.reply('Sinov testini yuklashda xatolik yuz berdi. Iltimos, birozdan so\'ng qayta urinib ko\'ring.');
   }
 };
 
