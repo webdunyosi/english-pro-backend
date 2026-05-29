@@ -211,7 +211,7 @@ const handleSinovTesti = async (ctx) => {
       },
       {
         question: '6. (B2) He _____ have left his laptop at the office; his bag is completely empty.',
-        options: ['must', "can't", 'shouldn't', "wouldn't"],
+        options: ['must', "can't", "shouldn't", "wouldn't"],
         correctOptionId: 0,
         explanation: 'B2 - Taxmin qilish (Modals of Deduction): biror narsaga qat\'iy ishonch bildirganimizda "must have done" ishlatiladi.'
       },
