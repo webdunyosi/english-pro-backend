@@ -346,9 +346,31 @@ const handlePollAnswer = async (ctx) => {
  */
 const handleVideoDarslik = async (ctx) => {
   try {
+    const text =
+      `📺 **VIDEO DARSLIKLAR**\n\n` +
+      `Ingliz tili darslarini oson va qiziqarli o'rganishingiz uchun maxsus video darslar to'plami. Quyidagi darslardan birini tanlang va tomosha qiling: 👇`;
+
     return ctx.reply(
-      '📺 **VIDEO DARSLIK**\n\nIngliz tili darslarini oson va qiziqarli o\'rganishingiz uchun maxsus video darsliklar va ko\'rsatmalar to\'plami.\n\n⚡️ *Tez kunda bu yerda yangi video darslar yuklanadi. Bizni kuzatishda davom eting!*',
-      { parse_mode: 'Markdown' }
+      text,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: '🎬 Intro', url: 'https://youtu.be/vMWXFIvzVBg?si=WxW2HvlLipIkmfks' }
+            ],
+            [
+              { text: '1️⃣ 1-dars. To be fe\'li', url: 'https://youtu.be/5oRMAI3Jhv0?si=AIMWgWyAoIATmD1D' }
+            ],
+            [
+              { text: '2️⃣ 2-dars. "Have" fe\'li', url: 'https://youtu.be/39MKKr65ejk?si=gF3Mm2vIrjqhmhBP' }
+            ],
+            [
+              { text: '3️⃣ 3-dars. Raqamlar va vaqt', url: 'https://youtu.be/wFz2YDhlhgM?si=RzZOYY933VBlf2n4' }
+            ]
+          ]
+        }
+      }
     );
   } catch (error) {
     console.error(`handleVideoDarslik xatoligi: ${error.message}`);
