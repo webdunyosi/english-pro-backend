@@ -9,7 +9,7 @@ const getMainMenu = () => {
     reply_markup: {
       keyboard: [
         [{ text: 'SINOV TESTI' }, { text: 'VIDEO DARSLIK' }],
-        [{ text: "LUG'AT" }]
+        [{ text: "LUG'AT" }, { text: '📞 Aloqa' }]
       ],
       resize_keyboard: true, // Tugmalarni mos o'lchamga keltirish
       one_time_keyboard: false, // Doimiy ko'rinib turishi
@@ -544,6 +544,40 @@ const handleBook2 = async (ctx) => {
   }
 };
 
+/**
+ * "📞 Aloqa" reply tugmasini qayta ishlash
+ */
+const handleAloqa = async (ctx) => {
+  try {
+    const text =
+      `📞 **Aloqa bo\'limi**\n\n` +
+      `Savollar, takliflar yoki hamkorlik bo'yicha biz bilan bog'lanishingiz mumkin. Biz sizga yordam berishdan mamnunmiz!\n\n` +
+      `📱 **Telefon raqam:** +998 (91) 701-73-20\n` +
+      `💬 **Telegram profil:** @AlimardonToshpulatov\n\n` +
+      `Pastdagi tugmalar orqali to'g'ridan-to'g'ri bog'lanishingiz mumkin: 👇`;
+
+    return ctx.reply(
+      text,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: '💬 Telegram orqali bog\'lanish', url: 'https://t.me/AlimardonToshpulatov' }
+            ],
+            [
+              { text: '📞 Telefon qilish', url: 'tel:+998917017320' }
+            ]
+          ]
+        }
+      }
+    );
+  } catch (error) {
+    console.error(`handleAloqa xatoligi: ${error.message}`);
+    return ctx.reply('Aloqa bo\'limini yuklashda xatolik yuz berdi.');
+  }
+};
+
 module.exports = {
   handleStart,
   handleCheckSubscription,
@@ -556,4 +590,5 @@ module.exports = {
   handleBook1,
   handleBook2,
   handlePollAnswer,
+  handleAloqa,
 };
