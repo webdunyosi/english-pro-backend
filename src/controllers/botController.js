@@ -221,6 +221,11 @@ const handleLugat = async (ctx) => {
               { text: 'Unit 1', url: 'https://t.me/SmartTesterBot?start=29B5mvPo' },
               { text: 'Unit 2', url: 'https://t.me/SmartTesterBot?start=29mYNrtQ' },
               { text: 'Unit 3', url: 'https://t.me/SmartTesterBot?start=2x26JGuo' }
+            ],
+            [
+              { text: 'Unit 4', url: 'https://t.me/SmartTesterBot?start=2DD2iged' },
+              { text: 'Unit 5', url: 'https://t.me/SmartTesterBot?start=2QS4J6pX' },
+              { text: 'Unit 6', url: 'https://t.me/SmartTesterBot?start=2AEk9rNv' }
             ]
           ]
         }
