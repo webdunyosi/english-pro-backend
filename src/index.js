@@ -53,7 +53,7 @@ const startApp = async () => {
     bot.hears('VIDEO DARSLIK', handleVideoDarslik);
     // Lug'at so'zining har xil turdagi apostroflari bilan kelish ehtimolini hisobga olamiz
     bot.hears(['LUG\'AT', 'LUG‘AT', 'LUG’AT', 'Lug\'at'], handleLugat);
-    bot.hears(/^(📞\s*)?Aloqa$/i, handleAloqa);
+    bot.hears(/Aloqa/i, handleAloqa);
 
 
     // Eski reply menu tugmalari (foydalanuvchilarda eski tugmalar keshlanib qolgan bo'lsa xatolik bo'lmasligi uchun)
