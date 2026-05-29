@@ -173,28 +173,9 @@ const handleProfile = async (ctx) => {
  */
 const handleSinovTesti = async (ctx) => {
   try {
-    const text =
-      `📘 **4000 Essential English Words**\n\n` +
-      `🖋 20 savollar\n` +
-      `💬 Quiz mode\n` +
-      `🔄 Word EN — Word UZ\n` +
-      `⏱ Har bir savolga 30 sec\n\n` +
-      `⌛️ **Unit'larni tanlash orqali savollar ro'yxatini shakllantiring!**`;
-
     return ctx.reply(
-      text,
-      {
-        parse_mode: 'Markdown',
-        reply_markup: {
-          inline_keyboard: [
-            [
-              { text: 'Unit 1', url: 'https://t.me/SmartTesterBot?start=29B5mvPo' },
-              { text: 'Unit 2', url: 'https://t.me/SmartTesterBot?start=29mYNrtQ' },
-              { text: 'Unit 3', url: 'https://t.me/SmartTesterBot?start=2x26JGuo' }
-            ]
-          ]
-        }
-      }
+      '📝 **SINOV TESTI**\n\nIngliz tili bilim darajangizni aniqlash va o\'rganilgan mavzularni mustahkamlash uchun mo\'ljallangan testlar bo\'limi.\n\n⚡️ *Tez kunda bu yerda turli darajadagi qiziqarli testlar va imtihonlar paydo bo\'ladi!*',
+      { parse_mode: 'Markdown' }
     );
   } catch (error) {
     console.error(`handleSinovTesti xatoligi: ${error.message}`);
@@ -222,9 +203,28 @@ const handleVideoDarslik = async (ctx) => {
  */
 const handleLugat = async (ctx) => {
   try {
+    const text =
+      `📘 **4000 Essential English Words**\n\n` +
+      `🖋 20 savollar\n` +
+      `💬 Quiz mode\n` +
+      `🔄 Word EN — Word UZ\n` +
+      `⏱ Har bir savolga 30 sec\n\n` +
+      `⌛️ **Unit'larni tanlash orqali savollar ro'yxatini shakllantiring!**`;
+
     return ctx.reply(
-      '📖 **LUG\'AT**\n\nSo\'z boyligingizni oshirish uchun eng ko\'p ishlatiladigan inglizcha so\'zlar, iboralar va ularning tarjimalari.\n\n⚡️ *Tez kunda bu yerda qulay lug\'at va so\'z o\'rganish bo\'limi ishga tushadi!*',
-      { parse_mode: 'Markdown' }
+      text,
+      {
+        parse_mode: 'Markdown',
+        reply_markup: {
+          inline_keyboard: [
+            [
+              { text: 'Unit 1', url: 'https://t.me/SmartTesterBot?start=29B5mvPo' },
+              { text: 'Unit 2', url: 'https://t.me/SmartTesterBot?start=29mYNrtQ' },
+              { text: 'Unit 3', url: 'https://t.me/SmartTesterBot?start=2x26JGuo' }
+            ]
+          ]
+        }
+      }
     );
   } catch (error) {
     console.error(`handleLugat xatoligi: ${error.message}`);
