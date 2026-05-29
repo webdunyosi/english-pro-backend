@@ -59,3 +59,13 @@ const startApp = async () => {
 
 // Ilovani ishga tushirish
 startApp();
+
+// Render.com bepul tarifi uchun HTTP server portini ochish
+const http = require('http');
+const PORT = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('English Pro Telegram Bot muvaffaqiyatli ishlamoqda!');
+}).listen(PORT, () => {
+  console.log(`Render.com uchun HTTP server ${PORT}-portda ishga tushdi.`);
+});
