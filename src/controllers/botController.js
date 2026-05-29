@@ -311,6 +311,16 @@ const handleBook1 = async (ctx) => {
               { text: 'Unit 24', url: 'https://t.me/SmartTesterBot?start=24arMobX' }
             ],
             [
+              { text: 'Unit 25', url: 'https://t.me/SmartTesterBot?start=2Y7qkuJS' },
+              { text: 'Unit 26', url: 'https://t.me/SmartTesterBot?start=4aNnuu65' },
+              { text: 'Unit 27', url: 'https://t.me/SmartTesterBot?start=3HNtroQo' }
+            ],
+            [
+              { text: 'Unit 28', url: 'https://t.me/SmartTesterBot?start=3X5uV3nm' },
+              { text: 'Unit 29', url: 'https://t.me/SmartTesterBot?start=24XLrS9q' },
+              { text: 'Unit 30', url: 'https://t.me/SmartTesterBot?start=2GkBQDdq' }
+            ],
+            [
               { text: '◀️ Ortga', callback_data: 'lugat_main' }
             ]
           ]
